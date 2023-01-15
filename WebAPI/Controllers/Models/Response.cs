@@ -13,6 +13,7 @@ namespace Social.Models
         public List<Registration>? listRegistration { get; set; }
         public Registration? Registration { get; set; }
 
+        public Posts? Posts { get; set; }
         public List<Posts>? listPosts { get; set; }
     }
 }

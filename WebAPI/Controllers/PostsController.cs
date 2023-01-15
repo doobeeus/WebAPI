@@ -6,41 +6,40 @@ using System.Linq;
 using System.Threading.Tasks;
 using Social.Models;
 using System.Data.SqlClient;
-
 namespace Social.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RegistrationController : ControllerBase
+    public class PostsController : ControllerBase
     {
         private readonly IConfiguration _configuration;
 
-        public RegistrationController(IConfiguration configuration)
+        public PostsController(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
         [HttpPost]
-        [Route("Registration")]
+        [Route("AddPost")]
 
-        public Response Registration(Registration registration)
+        public Response AddPost(Posts post)
         {
             Response response = new Response();
             // string connection, located in appsettings.json
             SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("SNCon").ToString());
             Dal dal = new Dal();
-            response = dal.Registration(registration, connection);
+            response = dal.AddPost(post, connection);
             return response;
         }
 
         [HttpPost]
-        [Route("Login")]
-        public Response Login(Registration registration)
+        [Route("DeletePost")]
+        public Response DeletePost(Posts post)
         {
             Response response = new Response();
             SqlConnection connection = new SqlConnection(_configuration.GetConnectionString("SNCon").ToString());
             Dal dal = new Dal();
-            response = dal.Login(registration, connection);
+            response = dal.DeletePost(post, connection);
             return response;
         }
     }
